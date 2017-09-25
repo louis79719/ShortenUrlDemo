@@ -22,7 +22,6 @@ app.get("/", function (request, response) {
 
 app.get("/:shortUrl", function(request, response, next){
   var url = request.params.shortUrl
-  console.dir( request.query )
   console.log( "url :" + url )
   try {
     var mongoDbId = ObjectId(url)
@@ -54,14 +53,11 @@ app.get("/:shortUrl", function(request, response, next){
 })
 
 app.get("/shortenUrl", function (request, response) {
-  console.log( "4" )
-  var url = request.query.url  
-  
+  var url = request.query.url    
   var returnObj = {}
   returnObj.original_url = url
   
-  MongoClient.connect(mongodbUrl, function (err, db) {    
-    
+  MongoClient.connect(mongodbUrl, function (err, db) {        
     var urlExist = false
     if (err) {
       console.log('Unable to connect to the mongoDB server. Error:', err);
